@@ -6,7 +6,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import random
-mean = 0
+mean = 1
 sd = 0.1
 no_of_samples = 1000
 def GenerateNormalSamples():
@@ -18,14 +18,24 @@ def GenerateNormalSamples():
 def PlotHistogram(dataNormal):
     count, bins, ignored = plt.hist(dataNormal, 14, density = True)
     plt.plot(bins, 1/(sd * np.sqrt(2 * np.pi)) * np.exp(- (bins - mean)**2/(2 * sd**2)), linewidth = 3, color = 'green')
+    plt.title('Normal Distribution for random samples(1000) with mean = 1 and standard deviation = 0.1')
+    plt.show()
+
+def PlotHistogramForExtractedHundred(extract_hundred):
+    count, bins, ignored = plt.hist(extract_hundred, 14, density = True)
+    plt.plot(bins, 1/(sd * np.sqrt(2 * np.pi)) * np.exp(- (bins - mean)**2/(2 * sd**2)), linewidth = 3, color = 'green')
+    plt.title('Normal Distribution for 100 extracted samples from the above samples with mean = 1 and standard deviation = 0.1')
     plt.show()
     
+
 def SampleHundredData(dataNormal):
     extract_hundred = []
     for i in range(100):
         extract_hundred.append(random.choice(dataNormal))
-        
-        np.mean(extract_hundred)
+
+    PlotHistogramForExtractedHundred(extract_hundred)
+    np.mean(extract_hundred)
+
 
 GenerateNormalSamples()    
 
